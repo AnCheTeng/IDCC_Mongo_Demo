@@ -6,7 +6,8 @@ mongoose.connect('mongodb://localhost/demoDB');
 
 fs.readFile('./youbike.json', {encoding: 'utf-8'}, function(err, data) {
   if (!err) {
-    YouBike.addNewData(data);
+    // YouBike.addNewData(data);
+    YouBike.removeAllData(data);
   } else {
     console.log(err);
   }

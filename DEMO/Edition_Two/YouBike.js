@@ -44,6 +44,17 @@ YouBike.statics.addNewData = function(NewData) {
 }
 
 
+YouBike.statics.removeAllData = function() {
+  this.remove({}, function(){});
+}
+
+YouBike.statics.removeBySno = function(sno) {
+  if (typeof sno != 'string'){
+    sno = sno.toString();
+  }
+  this.remove({"sno"=sno}, function(){});
+}
+
 function addZero(num, n) {
   var len = num.toString().length;
   while (len < n) {
