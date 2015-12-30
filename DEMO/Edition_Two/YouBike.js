@@ -21,20 +21,20 @@ var YouBike = new Schema({
 });
 
 
-YouBike.methods.addNewData = function(NewData) {
+YouBike.statics.addNewData = function(NewData) {
 
   var youbike_per_minute = JSON.parse(NewData);
   var length = Object.keys(youbike_per_minute.retVal).length;
   var one_item = 0;
-
+  var that = this;
   // Check if the NewData is really new
-  YouBike.findOne({mday: youbike_per_minute.retVal["0001"].mday}, function(err, youbike_data) {
+  this.findOne({mday: youbike_per_minute.retVal["0001"].mday}, function(err, youbike_data) {
     if (!youbike_data) {
 
       for (var i = 1; i <= length; i++) {
         one_item = youbike_per_minute.retVal[addZero(i, 4)];
         //===========================Store into Database===========================
-        var new_bike = new YouBike(one_item);
+        var new_bike = new that(one_item);
         new_bike.save();
         //===========================Store into Database===========================
       }
